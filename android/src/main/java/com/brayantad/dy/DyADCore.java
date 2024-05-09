@@ -1,0 +1,86 @@
+package com.brayantad.dy;
+
+import android.content.Context;
+import android.util.Log;
+
+import com.bytedance.sdk.openadsdk.TTAdManager;
+import com.bytedance.sdk.openadsdk.TTAdNative;
+import java.util.Objects;
+import com.facebook.react.bridge.Promise;
+import com.facebook.react.bridge.ReactContext;
+
+import android.app.Activity;
+
+public class DyADCore {
+  public static String TAG = "DyADCore";
+
+
+  // 头条广告init需要传的参数
+  public static String userId = "";
+  public static String appName = "穿山甲媒体APP";
+  public static int rewardAmount = 1;
+  public static String rewardName = "金币";
+
+  public static String tt_appid;
+
+  public static TTAdNative TTAdSdk;
+  public static TTAdManager ttAdManager;
+
+  // 信息流广告回调
+  public static Promise feedPromise;
+
+  // 存激励视频，全屏视频的回调
+  public static Promise rewardPromise;
+  public static Activity rewardActivity;
+
+  // 激励视频类的状态
+  public static boolean is_show = false;
+  public static boolean is_click = false;
+  public static boolean is_close = false;
+  public static boolean is_reward = false;
+  public static boolean is_download_idle = false;
+  public static boolean is_download_active = false;
+  public static boolean is_install = false;
+
+
+  public static ReactContext reactContext;
+
+  public static void initSdk(Context context, String appId, Boolean debug) {
+    if (TTAdSdk != null && Objects.equals(tt_appid, appId)) {
+      //已初始化
+      Log.d(TAG, "已初始化 TTAdSdk tt_appid " + tt_appid);
+      return;
+    }
+    tt_appid = appId;
+    if (context.getClass().getName().equals("ReactApplicationContext")) {
+      reactContext = (ReactContext) context;
+    }
+
+    //初始化回调结果
+    resetRewardResult();
+
+    // step1: 初始化sdk appid
+    TTAdManagerHolder.init(context, appId, debug);
+  }
+
+  /**
+   * 准备新的激励(全屏)视频回调
+   *
+   * @param promise
+   */
+  public static void prepareReward(Promise promise, Context context) {
+    rewardPromise = promise;
+    resetRewardResult();
+  }
+
+  public static void resetRewardResult() {
+    is_show = false;
+    is_click = false;
+    is_close = false;
+    is_reward = false;
+    is_download_idle = false;
+    is_download_active = false;
+    is_install = false;
+  }
+
+}
