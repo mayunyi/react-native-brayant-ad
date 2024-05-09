@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/video_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/tt_video_layout_hxb"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="false"
+        android:focusable="false">
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/shape_gradient"
+        android:orientation="vertical"
+        android:paddingBottom="65dp" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="end"
+            android:layout_marginRight="5dp"
+            android:padding="10dp" >
+
+            <ImageView
+                android:id="@+id/usAvatar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/extra_large" />
+
+            <LinearLayout
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingTop="20dp">
+
+                <ImageButton
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:id="@+id/btn_likevideo"
+                    android:src="@drawable/ic_video_like"
+                    android:scaleType="fitCenter"
+                    android:background="@null"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:textSize="12dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFFF"
+                    android:text="999+" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingTop="15dp">
+
+                <ImageButton
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:id="@+id/btn_comment_video"
+                    android:src="@drawable/ic_comment_item"
+                    android:scaleType="fitCenter"
+                    android:background="@null"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:textSize="12dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFFF"
+                     android:paddingTop="5dp"
+                    android:text="999+" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingTop="15dp">
+
+                <ImageButton
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:id="@+id/btn_share_video"
+                    android:src="@drawable/ic_share_item"
+                    android:scaleType="fitCenter"
+                    android:background="@null"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:textSize="12dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFFF"
+                    android:paddingTop="5dp"
+                    android:text="分享" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvAdAppName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="\@ 广の告之"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00FFFFFF"
+            android:gravity="left"
+            android:padding="10dp"
+            android:text="广告信息视频的标题文字... 如果文比较多的话，就会这样 巴拉巴拉"
+            android:textColor="#FFFFFF"
+            android:visibility="gone">
+
+        </TextView>
+
+    </LinearLayout>
+
+</RelativeLayout>
