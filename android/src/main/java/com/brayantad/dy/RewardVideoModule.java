@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.brayantad.dy.activities.RewardActivity;
 import com.facebook.react.bridge.Promise;
@@ -12,6 +13,8 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 public class RewardVideoModule extends ReactContextBaseJavaModule {
   private static final String TAG = "RewardVideo";
@@ -57,6 +60,13 @@ public class RewardVideoModule extends ReactContextBaseJavaModule {
       e.printStackTrace();
       Log.e(TAG, "start reward Activity error: ", e);
     }
+  }
+
+  // 发送事件到RN
+  public static void sendEvent(String eventName, @Nullable WritableMap params) {
+    mContext
+      .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+      .emit(TAG + "-" + eventName, params);
   }
 
 }

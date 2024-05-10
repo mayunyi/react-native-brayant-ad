@@ -6,6 +6,11 @@ import android.util.Log;
 import com.bytedance.sdk.openadsdk.TTAdManager;
 import com.bytedance.sdk.openadsdk.TTAdNative;
 import java.util.Objects;
+
+import com.bytedance.sdk.openadsdk.TTFullScreenVideoAd;
+import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
+import com.bytedance.sdk.openadsdk.TTRewardVideoAd;
+import com.bytedance.sdk.openadsdk.TTSplashAd;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactContext;
 
@@ -14,6 +19,7 @@ import android.app.Activity;
 public class DyADCore {
   public static String TAG = "DyADCore";
 
+  public static Boolean debug = true;
 
   // 头条广告init需要传的参数
   public static String userId = "";
@@ -42,7 +48,20 @@ public class DyADCore {
   public static boolean is_download_active = false;
   public static boolean is_install = false;
 
+  //codeids
+  public static String codeid_splash;
+  public static String codeid_feed;
+  public static String codeid_draw_video;
+  public static String codeid_full_video;
+  public static String codeid_reward_video;
+  public static String codeid_stream;
 
+  // 缓存加载的头条广告数据
+  public static TTRewardVideoAd rewardAd;
+  public static TTFullScreenVideoAd fullAd;
+  public static TTNativeExpressAd feedAd;
+  public static TTNativeExpressAd drawfeedAd;
+  public static TTSplashAd splashAd;
   public static ReactContext reactContext;
 
   public static void initSdk(Context context, String appId, Boolean debug) {
@@ -83,4 +102,31 @@ public class DyADCore {
     is_install = false;
   }
 
+  /**
+   * 关联页面，返回页面用
+   *
+   * @param activity
+   */
+  public static void hookActivity(Activity activity) {
+    rewardActivity = activity;
+  }
+
+  public static String getRewardResult() {
+    String json =
+      "{\"video_play\":" +
+        is_show +
+        ",\"ad_click\":" +
+        is_click +
+        ",\"apk_install\":" +
+        is_install +
+        ",\"verify_status\":" +
+        is_reward +
+        "}";
+    if (rewardPromise != null) rewardPromise.resolve(json); //返回当前窗口加载的
+    if (rewardActivity != null) {
+      rewardActivity.finish();
+    }
+    Log.d(TAG, "getRewardResult: " + json);
+    return json;
+  }
 }

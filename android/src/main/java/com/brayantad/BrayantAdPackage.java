@@ -17,6 +17,7 @@ public class BrayantAdPackage implements ReactPackage {
   public List<NativeModule> createNativeModules(@NonNull ReactApplicationContext reactContext) {
     List<NativeModule> modules = new ArrayList<>();
     modules.add(new BrayantAdModule(reactContext));
+    modules.add(new AdManager(reactContext));
     return modules;
   }
 
