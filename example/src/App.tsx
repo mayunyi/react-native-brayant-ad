@@ -1,18 +1,60 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
-import { StyleSheet, View, Text } from 'react-native';
 import { multiply } from 'react-native-brayant-ad';
 
 export default function App() {
   const [result, setResult] = React.useState<number | undefined>();
 
-  React.useEffect(() => {
+  useEffect(() => {
     multiply(3, 7).then(setResult);
+    // ad.initSdk({
+    //   appid: '5519001',
+    //   app: '猪猪进步',
+    //   codeid_reward_video: '956956876',
+    // });
   }, []);
 
   return (
     <View style={styles.container}>
       <Text>Result: {result}</Text>
+      <Text>Result: {result}11</Text>
+      <TouchableOpacity
+        style={{
+          marginVertical: 20,
+          paddingHorizontal: 30,
+          paddingVertical: 15,
+          backgroundColor: '#F96',
+          borderRadius: 50,
+        }}
+        onPress={() => {
+          // const rewardVideo = ad.startRewardVideo({
+          //   codeid: '945294086',
+          // });
+          //
+          // rewardVideo.result.then((val: any) => {
+          //   console.log('RewardVideo 回调结果', val);
+          // });
+          //
+          // rewardVideo.subscribe('onAdLoaded', (event) => {
+          //   console.log('广告加载成功监听', event);
+          // });
+          //
+          // rewardVideo.subscribe('onAdError', (event) => {
+          //   console.log('广告加载失败监听', event);
+          // });
+          //
+          // rewardVideo.subscribe('onAdClose', (event) => {
+          //   console.log('广告被关闭监听', event);
+          // });
+          //
+          // rewardVideo.subscribe('onAdClick', (event) => {
+          //   console.log('广告点击查看详情监听', event);
+          // });
+        }}
+      >
+        <Text style={{ textAlign: 'center' }}> Start RewardVideoAd</Text>
+      </TouchableOpacity>
     </View>
   );
 }

@@ -1,4 +1,6 @@
 import { NativeModules, Platform } from 'react-native';
+import { initSdk, loadFeedAd, loadDrawFeedAd } from './dy/AdManager';
+import startRewardVideo from './dy/RewardVideo';
 
 const LINKING_ERROR =
   `The package 'react-native-brayant-ad' doesn't seem to be linked. Make sure: \n\n` +
@@ -20,3 +22,12 @@ const BrayantAd = NativeModules.BrayantAd
 export function multiply(a: number, b: number): Promise<number> {
   return BrayantAd.multiply(a, b);
 }
+
+export default {
+  initSdk,
+  multiply,
+
+  loadFeedAd,
+  loadDrawFeedAd,
+  startRewardVideo,
+};

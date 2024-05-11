@@ -17,7 +17,7 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 public class RewardVideoModule extends ReactContextBaseJavaModule {
-  private static final String TAG = "RewardVideo";
+  private static final String TAG = "RewardVideoModule";
   private static ReactApplicationContext mContext;
   public static Promise promise;
 
