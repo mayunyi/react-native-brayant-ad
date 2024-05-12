@@ -1,5 +1,5 @@
 import { NativeModules, Platform } from 'react-native';
-import { initSdk, loadFeedAd, loadDrawFeedAd } from './dy/AdManager';
+import { init, loadFeedAd, loadDrawFeedAd } from './dy/AdManager';
 import startRewardVideo from './dy/RewardVideo';
 
 const LINKING_ERROR =
@@ -22,12 +22,4 @@ const BrayantAd = NativeModules.BrayantAd
 export function multiply(a: number, b: number): Promise<number> {
   return BrayantAd.multiply(a, b);
 }
-
-export default {
-  initSdk,
-  multiply,
-
-  loadFeedAd,
-  loadDrawFeedAd,
-  startRewardVideo,
-};
+export { init, loadFeedAd, loadDrawFeedAd, startRewardVideo };

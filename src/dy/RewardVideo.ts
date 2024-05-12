@@ -1,5 +1,5 @@
 import { NativeModules, NativeEventEmitter } from 'react-native';
-
+const { RewardVideoModule } = NativeModules;
 const listenerCache = {};
 export interface AD_EVENT_TYPE {
   onAdError: string; // 广告加载失败监听
@@ -18,13 +18,13 @@ type rewardInfo = {
 };
 
 export default function (info: rewardInfo) {
-  const { RewardVideoModule } = NativeModules;
   const eventEmitter = new NativeEventEmitter(RewardVideoModule);
   let result = RewardVideoModule.startAd(info);
-
+console.log(result)
   return {
     result,
     subscribe: (type: keyof AD_EVENT_TYPE, callback: (event: any) => void) => {
+      console.log(type)
       if (listenerCache[type]) {
         listenerCache[type].remove();
       }

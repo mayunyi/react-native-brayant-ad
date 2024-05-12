@@ -38,7 +38,8 @@ public class RewardVideoModule extends ReactContextBaseJavaModule {
     String codeId = options.getString("codeid");
     String provider = options.getString("provider");
     Log.d(TAG, "startAd:codeId: " + codeId + provider);
-
+    //准备激励回调
+    DyADCore.prepareReward(promise, mContext);
     //准备激励回调
     startTT(codeId);
   }

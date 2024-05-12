@@ -80,6 +80,11 @@ public class DyADCore {
 
     // step1: 初始化sdk appid
     TTAdManagerHolder.init(context, appId, debug);
+    // step2:创建TTAdNative对象，createAdNative(Context context)
+    // feed广告context需要传入Activity对象
+    ttAdManager = TTAdManagerHolder.get();
+
+    TTAdSdk = ttAdManager.createAdNative(context);
   }
 
   /**

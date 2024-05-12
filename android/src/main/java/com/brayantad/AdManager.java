@@ -1,7 +1,5 @@
 package com.brayantad;
 
-import static com.facebook.react.bridge.UiThreadUtil.runOnUiThread;
-
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -35,30 +33,29 @@ public class AdManager extends ReactContextBaseJavaModule {
     return TAG;
   }
   @ReactMethod
-  public void init(ReadableMap options) {
+  public void init(ReadableMap options, Promise promise) {
     //默认头条穿山甲
     DyADCore.tt_appid = options.hasKey("appid") ? options.getString("appid") : DyADCore.tt_appid;
     DyADCore.debug = options.hasKey("debug") ? options.getBoolean("debug") : DyADCore.debug;
     if (DyADCore.tt_appid != null) {
-      runOnUiThread(() -> {
-        DyADCore.initSdk(reactAppContext, DyADCore.tt_appid, DyADCore.debug);
 
-        if (options.hasKey("codeid_reward_video")) {
-          DyADCore.codeid_reward_video = options.getString("codeid_reward_video");
-            //提前加载
-            assert DyADCore.codeid_reward_video != null;
-            RewardActivity.loadAd(
-            DyADCore.codeid_reward_video,
-            () -> {
-              Log.d(
-                TAG,
-                "提前加载 成功 codeid_reward_video " +
-                  DyADCore.codeid_reward_video
-              );
-            }
-          );
-        }
-      });
+      DyADCore.initSdk(reactAppContext, DyADCore.tt_appid, DyADCore.debug);
+
+      if (options.hasKey("codeid_reward_video")) {
+        DyADCore.codeid_reward_video = options.getString("codeid_reward_video");
+        //提前加载
+        assert DyADCore.codeid_reward_video != null;
+        RewardActivity.loadAd(
+          DyADCore.codeid_reward_video,
+          () -> {
+            Log.d(
+              TAG,
+              "提前加载 成功 codeid_reward_video " +
+                DyADCore.codeid_reward_video
+            );
+          }
+        );
+      }
     }
   }
 

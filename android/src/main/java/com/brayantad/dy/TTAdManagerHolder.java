@@ -1,6 +1,8 @@
 package com.brayantad.dy;
 
 import android.content.Context;
+import android.util.Log;
+
 import com.bytedance.sdk.openadsdk.TTAdConfig;
 import com.bytedance.sdk.openadsdk.TTAdConstant;
 import com.bytedance.sdk.openadsdk.TTAdManager;
@@ -33,8 +35,8 @@ public class TTAdManagerHolder {
     final Boolean debug
   ) {
     if (!sInit) {
-      TTAdSdk.init(context, buildConfig(context, appid, debug));
-      sInit = true;
+        sInit = TTAdSdk.init(context, buildConfig(context, appid, debug));
+        Log.d(TAG,"穿山甲初始化："+ sInit);
     }
   }
 

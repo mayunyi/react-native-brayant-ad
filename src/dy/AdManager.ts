@@ -14,7 +14,7 @@ type appInfo = {
   ks_appid?: string;
 };
 
-const initSdk = (appInfo: appInfo) => {
+const init = (appInfo: appInfo) => {
   // FIXME: init 传入一些codeid可以提前加载广告，比如视频类
   AdManager.init(appInfo);
 };
@@ -37,8 +37,4 @@ const loadDrawFeedAd = (info: feedInfo) => {
   }
 };
 
-export {
-  initSdk,
-  loadFeedAd,
-  loadDrawFeedAd,
-};
+export { init, loadFeedAd, loadDrawFeedAd };

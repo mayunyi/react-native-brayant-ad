@@ -41,14 +41,20 @@ public class RewardActivity extends Activity {
       return;
     }
     // 开始加载广告，如果已用缓存的展示过，给下次展示激励视频提前缓存广告
+//    loadAd(
+//      codeId,
+//      () -> {
+//        runOnUiThread(
+//          () -> {
+//            showAd(DyADCore.rewardAd);
+//          }
+//        );
+//      }
+//    );
     loadAd(
       codeId,
       () -> {
-        runOnUiThread(
-          () -> {
-            showAd(DyADCore.rewardAd);
-          }
-        );
+        showAd(DyADCore.rewardAd);
       }
     );
 
