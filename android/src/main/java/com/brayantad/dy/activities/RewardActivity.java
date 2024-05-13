@@ -13,6 +13,7 @@ import com.brayantad.dy.DyADCore;
 import com.bytedance.sdk.openadsdk.AdSlot;
 import com.bytedance.sdk.openadsdk.TTAdConstant;
 import com.bytedance.sdk.openadsdk.TTAdNative;
+import com.bytedance.sdk.openadsdk.TTAdSdk;
 import com.bytedance.sdk.openadsdk.TTAppDownloadListener;
 import com.bytedance.sdk.openadsdk.TTRewardVideoAd;
 import com.facebook.react.bridge.Arguments;
@@ -40,28 +41,44 @@ public class RewardActivity extends Activity {
       DyADCore.rewardActivity.finish();
       return;
     }
-    // 开始加载广告，如果已用缓存的展示过，给下次展示激励视频提前缓存广告
-//    loadAd(
-//      codeId,
-//      () -> {
-//        runOnUiThread(
-//          () -> {
-//            showAd(DyADCore.rewardAd);
-//          }
-//        );
-//      }
-//    );
-    loadAd(
-      codeId,
-      () -> {
+
+    boolean sdkReady = TTAdSdk.isSdkReady();
+    if(!sdkReady) {
+      TTAdSdk.start(new TTAdSdk.Callback(){
+        @Override
+        public void success() {
+          // 开始加载广告，如果已用缓存的展示过，给下次展示激励视频提前缓存广告
+          loadAd(
+            codeId,
+            () -> {
+              showAd(DyADCore.rewardAd);
+            }
+          );
+          //有缓存的广告,并且代码位和init的相同，直接展示
+          if (DyADCore.rewardAd != null && codeId.equals(DyADCore.codeid_reward_video)) {
+            Log.d(TAG, "直接展示提前加载的广告");
+            showAd(DyADCore.rewardAd);
+          }
+        }
+        @Override
+        public void fail(int code, String msg) {
+          Log.i(TAG, "fail:  code = " + code + " msg = " + msg);
+        }
+      });
+    } else {
+      // 开始加载广告，如果已用缓存的展示过，给下次展示激励视频提前缓存广告
+      loadAd(
+        codeId,
+        () -> {
+          showAd(DyADCore.rewardAd);
+        }
+      );
+
+      //有缓存的广告,并且代码位和init的相同，直接展示
+      if (DyADCore.rewardAd != null && codeId.equals(DyADCore.codeid_reward_video)) {
+        Log.d(TAG, "直接展示提前加载的广告");
         showAd(DyADCore.rewardAd);
       }
-    );
-
-    //有缓存的广告,并且代码位和init的相同，直接展示
-    if (DyADCore.rewardAd != null && codeId.equals(DyADCore.codeid_reward_video)) {
-      Log.d(TAG, "直接展示提前加载的广告");
-      showAd(DyADCore.rewardAd);
     }
   }
 
@@ -85,10 +102,10 @@ public class RewardActivity extends Activity {
 
     //FIXME:  穿山甲需要全面替换 express 模式
     // 请求广告
+
     DyADCore.TTAdSdk.loadRewardVideoAd(
       adSlot,
       new TTAdNative.RewardVideoAdListener() {
-
         @Override
         public void onError(int code, String message) {
           Log.d("reward onError ", message);
@@ -97,7 +114,6 @@ public class RewardActivity extends Activity {
             DyADCore.rewardActivity.finish();
           }
         }
-
         @Override
         public void onRewardVideoCached() {}
 
@@ -107,14 +123,12 @@ public class RewardActivity extends Activity {
           Log.d("reward Cached ", "穿山甲激励视频缓存成功");
           fireEvent("onAdVideoCached", 201, "穿山甲激励视频缓存成功");
         }
-
         // 视频广告的素材加载完毕，比如视频url等，在此回调后，可以播放在线视频，网络不好可能出现加载缓冲，影响体验。
         @Override
         public void onRewardVideoAdLoad(TTRewardVideoAd ad) {
           Log.d("reward AdLoad ", ad.toString());
           sendEvent("AdLoaded", null);
           fireEvent("onAdLoaded", 200, "视频广告的素材加载完毕");
-
           // 缓存的更新为最新加载成功的广告
           DyADCore.rewardAd = ad;
           callback.run();

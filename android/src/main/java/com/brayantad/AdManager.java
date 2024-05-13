@@ -8,6 +8,7 @@ import com.brayantad.dy.DyADCore;
 import com.brayantad.dy.activities.RewardActivity;
 import com.bytedance.sdk.openadsdk.AdSlot;
 import com.bytedance.sdk.openadsdk.TTAdNative;
+import com.bytedance.sdk.openadsdk.TTAdSdk;
 import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -45,16 +46,20 @@ public class AdManager extends ReactContextBaseJavaModule {
         DyADCore.codeid_reward_video = options.getString("codeid_reward_video");
         //提前加载
         assert DyADCore.codeid_reward_video != null;
-        RewardActivity.loadAd(
-          DyADCore.codeid_reward_video,
-          () -> {
-            Log.d(
-              TAG,
-              "提前加载 成功 codeid_reward_video " +
-                DyADCore.codeid_reward_video
-            );
-          }
-        );
+
+        boolean sdkReady = TTAdSdk.isSdkReady();
+        if(!sdkReady) {
+          RewardActivity.loadAd(
+            DyADCore.codeid_reward_video,
+            () -> {
+              Log.d(
+                TAG,
+                "提前加载 成功 codeid_reward_video " +
+                  DyADCore.codeid_reward_video
+              );
+            }
+          );
+        }
       }
     }
   }

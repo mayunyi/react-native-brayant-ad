@@ -36,7 +36,6 @@ public class TTAdManagerHolder {
   ) {
     if (!sInit) {
         sInit = TTAdSdk.init(context, buildConfig(context, appid, debug));
-        Log.d(TAG,"穿山甲初始化："+ sInit);
     }
   }
 
