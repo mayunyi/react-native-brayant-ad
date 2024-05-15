@@ -11,8 +11,7 @@
   <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
   <!-- <uses-permission android:name="android.permission.GET_TASKS"/> -->
   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-  <uses-permission android:name="android.permission.WAKE_LOCK" />
-
+  <uses-permission android:name="android.permission.WAKE_LOCK" data-tomark-pass="true"/>
   <application>
 
     <activity android:name=".dy.activities.RewardActivity" />

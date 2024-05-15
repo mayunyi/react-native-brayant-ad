@@ -50,18 +50,24 @@ public class RewardVideoModule extends ReactContextBaseJavaModule {
    * @param codeId
    */
   public static void startTT(String codeId) {
-    Activity context = mContext.getCurrentActivity();
+    Activity currentActivity = mContext.getCurrentActivity();
+    if (currentActivity == null) {
+      Log.e(TAG, "startTT: currentActivity is null");
+      return;
+    }
+
     try {
-      Intent intent = new Intent(mContext, RewardActivity.class);
+      Intent intent = new Intent(currentActivity, RewardActivity.class);
       intent.putExtra("codeId", codeId);
-      // 不要过渡动画
-      context.overridePendingTransition(0, 0);
-      context.startActivityForResult(intent, 10000);
+      // Disable transition animation
+      currentActivity.overridePendingTransition(0, 0);
+      currentActivity.startActivityForResult(intent, 10000);
     } catch (Exception e) {
       e.printStackTrace();
       Log.e(TAG, "start reward Activity error: ", e);
     }
   }
+
 
   // 发送事件到RN
   public static void sendEvent(String eventName, @Nullable WritableMap params) {

@@ -15,9 +15,24 @@ export default function App() {
     });
   }, []);
 
+  const onOpenScren = () => {
+    
+  }
   return (
     <View style={styles.container}>
       <Text>Result: {result}</Text>
+      <TouchableOpacity
+        style={{
+          marginVertical: 20,
+          paddingHorizontal: 30,
+          paddingVertical: 15,
+          backgroundColor: '#F96',
+          borderRadius: 50,
+        }}
+        onPress={onOpenScren}
+      >
+        开屏
+      </TouchableOpacity>
       <TouchableOpacity
         style={{
           marginVertical: 20,

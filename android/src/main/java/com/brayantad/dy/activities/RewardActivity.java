@@ -7,9 +7,12 @@ import androidx.annotation.Nullable;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.brayantad.R;
 import com.brayantad.dy.DyADCore;
+import com.brayantad.utils.RewardBundleModel;
+import com.brayantad.utils.TToast;
 import com.bytedance.sdk.openadsdk.AdSlot;
 import com.bytedance.sdk.openadsdk.TTAdConstant;
 import com.bytedance.sdk.openadsdk.TTAdNative;
@@ -23,7 +26,8 @@ import com.facebook.react.bridge.WritableMap;
 public class RewardActivity extends Activity {
   private static final String TAG = "RewardVideo";
   private boolean adShowing = false;
-  private TTRewardVideoAd adObj = null;
+
+  private boolean isEnableAdvancedReward = false;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -163,7 +167,6 @@ public class RewardActivity extends Activity {
     // ad.setShowDownLoadBar(false);
     ad.setRewardAdInteractionListener(
       new TTRewardVideoAd.RewardAdInteractionListener() {
-
         @Override
         public void onAdShow() {
           String msg = "开始展示奖励视频";
@@ -214,20 +217,47 @@ public class RewardActivity extends Activity {
           String aa
         ) {
           if (rewardVerify) {
-            // TToast.show(_this, "验证:成功  数量:" + rewardAmount + " 奖励:" + rewardName, Toast.LENGTH_LONG);
+             TToast.show(_this, "验证:成功  数量:" + rewardAmount + " 奖励:" + rewardName, Toast.LENGTH_LONG);
           } else {
-            // TToast.show(_this, "头条激励视频验证:" + "失败 ...", Toast.LENGTH_SHORT);
+             TToast.show(_this, "头条激励视频验证:" + "失败 ...", Toast.LENGTH_SHORT);
           }
           DyADCore.is_reward = true;
         }
 
         @Override
-        public void onRewardArrived(boolean rewardVerify, int rewardAmount, Bundle bundle) {
-            // 奖励发放
-          if (rewardVerify) {
-            // TToast.show(_this, "验证:成功  数量:" + rewardAmount + " 奖励:" + rewardName, Toast.LENGTH_LONG);
+        public void onRewardArrived(boolean isRewardValid, int rewardType, Bundle bundle) {
+
+          RewardBundleModel rewardBundleModel = new RewardBundleModel(bundle);
+          Log.e(TAG, "Callback --> rewardVideoAd has onRewardArrived " +
+            "\n奖励是否有效：" + isRewardValid +
+            "\n奖励类型：" + rewardType +
+            "\n奖励名称：" + rewardBundleModel.getRewardName() +
+            "\n奖励数量：" + rewardBundleModel.getRewardAmount() +
+            "\n建议奖励百分比：" + rewardBundleModel.getRewardPropose());
+          String message = "\n奖励是否有效：" + isRewardValid +
+            "\n奖励类型：" + rewardType +
+            "\n奖励名称：" + rewardBundleModel.getRewardName() +
+            "\n奖励数量：" + rewardBundleModel.getRewardAmount() * rewardBundleModel.getRewardPropose() +
+            "\n建议奖励百分比：" + rewardBundleModel.getRewardPropose();
+          // 奖励发放
+          if (!isRewardValid) {
+            fireEvent("onRewardArrived", 200, message);
+            TToast.show(_this, "头条激励视频验证:" + "失败 ...", Toast.LENGTH_SHORT);
+            return;
+          }
+          isEnableAdvancedReward = rewardType != 0;
+          if (!isEnableAdvancedReward) {
+            // 未使用进阶奖励功能
+            fireEvent("onRewardArrived", 200, message);
+
+            if (rewardType == TTRewardVideoAd.REWARD_TYPE_DEFAULT) {
+              Log.d(TAG, "普通奖励发放，name:" + rewardBundleModel.getRewardName() +
+                "\namount:" + rewardBundleModel.getRewardAmount());
+            }
           } else {
-            // TToast.show(_this, "头条激励视频验证:" + "失败 ...", Toast.LENGTH_SHORT);
+            // 使用了进阶奖励功能
+            Log.d(TAG, "进阶奖励功能，name:" + rewardBundleModel.getRewardName() +
+              "\namount:" + rewardBundleModel.getRewardAmount());
           }
           DyADCore.is_reward = true;
         }

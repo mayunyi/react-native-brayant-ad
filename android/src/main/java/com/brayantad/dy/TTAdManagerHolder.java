@@ -35,7 +35,7 @@ public class TTAdManagerHolder {
     final Boolean debug
   ) {
     if (!sInit) {
-        sInit = TTAdSdk.init(context, buildConfig(context, appid, debug));
+      sInit = TTAdSdk.init(context, buildConfig(context, appid, debug));
     }
   }
 

@@ -1,5 +1,6 @@
 package com.brayantad;
 
+import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -7,6 +8,7 @@ import androidx.annotation.NonNull;
 import com.brayantad.dy.DyADCore;
 import com.brayantad.dy.activities.RewardActivity;
 import com.bytedance.sdk.openadsdk.AdSlot;
+import com.bytedance.sdk.openadsdk.TTAdConfig;
 import com.bytedance.sdk.openadsdk.TTAdNative;
 import com.bytedance.sdk.openadsdk.TTAdSdk;
 import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
@@ -49,16 +51,36 @@ public class AdManager extends ReactContextBaseJavaModule {
 
         boolean sdkReady = TTAdSdk.isSdkReady();
         if(!sdkReady) {
-          RewardActivity.loadAd(
-            DyADCore.codeid_reward_video,
-            () -> {
-              Log.d(
-                TAG,
-                "提前加载 成功 codeid_reward_video " +
-                  DyADCore.codeid_reward_video
+
+          TTAdSdk.start(new TTAdSdk.Callback() {
+            @Override
+            public void success() {
+              Log.i(TAG, "success: " + TTAdSdk.isSdkReady());
+              RewardActivity.loadAd(
+                DyADCore.codeid_reward_video,
+                () -> {
+                  Log.d(
+                    TAG,
+                    "提前加载 成功 codeid_reward_video " +
+                      DyADCore.codeid_reward_video
+                  );
+                }
               );
             }
-          );
+
+            @Override
+            public void fail(int code, String msg) {
+              Log.i(TAG, "fail:  code = " + code + " msg = " + msg);
+            }
+            private static TTAdConfig buildConfig(Context context) {
+              return new TTAdConfig.Builder()
+                .appId("xxxxxx")//应用ID
+                .supportMultiProcess(true)//开启多进程
+                .build();
+            }
+          });
+
+
         }
       }
     }

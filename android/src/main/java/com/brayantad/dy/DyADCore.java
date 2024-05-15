@@ -20,12 +20,12 @@ import android.app.Activity;
 public class DyADCore {
   public static String TAG = "DyADCore";
 
-  public static Boolean debug = true;
+  public static Boolean debug = false;
 
   // 头条广告init需要传的参数
   public static String userId = "";
   public static String appName = "穿山甲媒体APP";
-  public static int rewardAmount = 1;
+  public static int rewardAmount = 1000;
   public static String rewardName = "金币";
 
   public static String tt_appid;
