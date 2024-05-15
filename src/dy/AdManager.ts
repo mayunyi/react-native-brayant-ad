@@ -37,4 +37,8 @@ const loadDrawFeedAd = (info: feedInfo) => {
   }
 };
 
-export { init, loadFeedAd, loadDrawFeedAd };
+// 主动看激励视频时，才检查这个权限
+const requestPermission = () => {
+  AdManager.requestPermission();
+};
+export { init, loadFeedAd, loadDrawFeedAd, requestPermission };

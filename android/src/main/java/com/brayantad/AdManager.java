@@ -74,7 +74,7 @@ public class AdManager extends ReactContextBaseJavaModule {
             }
             private static TTAdConfig buildConfig(Context context) {
               return new TTAdConfig.Builder()
-                .appId("xxxxxx")//应用ID
+                .appId(DyADCore.tt_appid)//应用ID
                 .supportMultiProcess(true)//开启多进程
                 .build();
             }

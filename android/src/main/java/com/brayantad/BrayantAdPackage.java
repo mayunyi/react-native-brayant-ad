@@ -3,6 +3,7 @@ package com.brayantad;
 import androidx.annotation.NonNull;
 
 import com.brayantad.dy.RewardVideoModule;
+import com.brayantad.dy.SplashAdModule;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -19,6 +20,7 @@ public class BrayantAdPackage implements ReactPackage {
     List<NativeModule> modules = new ArrayList<>();
     modules.add(new BrayantAdModule(reactContext));
     modules.add(new AdManager(reactContext));
+    modules.add(new SplashAdModule(reactContext));
     modules.add(new RewardVideoModule(reactContext));
     return modules;
   }

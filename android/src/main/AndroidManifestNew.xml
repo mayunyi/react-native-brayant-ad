@@ -14,6 +14,7 @@
   <uses-permission android:name="android.permission.WAKE_LOCK" data-tomark-pass="true"/>
   <application>
 
+    <activity android:name=".dy.activities.SplashActivity" />
     <activity android:name=".dy.activities.RewardActivity" />
 
     <provider

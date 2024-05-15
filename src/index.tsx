@@ -1,7 +1,12 @@
 import { NativeModules, Platform } from 'react-native';
-import { init, loadFeedAd, loadDrawFeedAd } from './dy/AdManager';
+import {
+  init,
+  loadFeedAd,
+  loadDrawFeedAd,
+  requestPermission,
+} from './dy/AdManager';
 import startRewardVideo from './dy/RewardVideo';
-
+import { dyLoadSplashAd } from './dy/SplashAd';
 const LINKING_ERROR =
   `The package 'react-native-brayant-ad' doesn't seem to be linked. Make sure: \n\n` +
   Platform.select({ ios: "- You have run 'pod install'\n", default: '' }) +
@@ -22,4 +27,11 @@ const BrayantAd = NativeModules.BrayantAd
 export function multiply(a: number, b: number): Promise<number> {
   return BrayantAd.multiply(a, b);
 }
-export { init, loadFeedAd, loadDrawFeedAd, startRewardVideo };
+export {
+  init,
+  loadFeedAd,
+  requestPermission,
+  loadDrawFeedAd,
+  startRewardVideo,
+  dyLoadSplashAd,
+};

@@ -1,5 +1,6 @@
 package com.brayantad.dy;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 
@@ -38,7 +39,12 @@ public class DyADCore {
 
   // 存激励视频，全屏视频的回调
   public static Promise rewardPromise;
+  @SuppressLint("StaticFieldLeak")
   public static Activity rewardActivity;
+
+  // SplashAd config
+  public static int splashAd_anim_in = 0;
+  public static int splashAd_anim_out = 0;
 
   // 激励视频类的状态
   public static boolean is_show = false;

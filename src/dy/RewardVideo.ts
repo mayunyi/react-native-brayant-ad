@@ -1,7 +1,4 @@
-import {
-  NativeModules,
-  NativeEventEmitter,
-} from 'react-native';
+import { NativeModules, NativeEventEmitter } from 'react-native';
 import type { EventSubscription } from 'react-native';
 const { RewardVideoModule } = NativeModules;
 export enum AD_EVENT_TYPE {

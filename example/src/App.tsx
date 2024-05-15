@@ -1,7 +1,13 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
-import { multiply, init, startRewardVideo } from 'react-native-brayant-ad';
+import {
+  multiply,
+  init,
+  startRewardVideo,
+  requestPermission,
+  dyLoadSplashAd,
+} from 'react-native-brayant-ad';
 
 export default function App() {
   const [result, setResult] = React.useState<number | undefined>();
@@ -16,8 +22,31 @@ export default function App() {
   }, []);
 
   const onOpenScren = () => {
-    
-  }
+    const splashAd = dyLoadSplashAd({
+      codeid: '889272631',
+      anim: 'default',
+    });
+
+    splashAd.subscribe('onAdClose', (event) => {
+      console.log('广告关闭', event);
+    });
+
+    splashAd.subscribe('onAdSkip', (i) => {
+      console.log('用户点击跳过监听', i);
+    });
+
+    splashAd.subscribe('onAdError', (e) => {
+      console.log('开屏加载失败监听', e);
+    });
+
+    splashAd.subscribe('onAdClick', (e) => {
+      console.log('开屏被用户点击了', e);
+    });
+
+    splashAd.subscribe('onAdShow', (e) => {
+      console.log('开屏开始展示', e);
+    });
+  };
   return (
     <View style={styles.container}>
       <Text>Result: {result}</Text>
@@ -31,7 +60,8 @@ export default function App() {
         }}
         onPress={onOpenScren}
       >
-        开屏
+        <Text style={{ textAlign: 'center' }}> 开屏</Text>
+
       </TouchableOpacity>
       <TouchableOpacity
         style={{
@@ -42,6 +72,7 @@ export default function App() {
           borderRadius: 50,
         }}
         onPress={() => {
+          requestPermission();
           const rewardVideo = startRewardVideo({
             codeid: '956956876',
           });
