@@ -84,7 +84,7 @@ public class SplashActivity extends AppCompatActivity implements WeakHandler.IHa
     // 绑定广告控制 Activity
     DyADCore.hookActivity(this);
     boolean sdkReady = TTAdSdk.isSdkReady();
-    if (DyADCore.splashAd != null) {
+    if (DyADCore.splashAd != null && sdkReady ) {
       // 直接展示预加载的开屏广告
       showSplashAd();
     } else {
@@ -105,7 +105,6 @@ public class SplashActivity extends AppCompatActivity implements WeakHandler.IHa
   private void initView() {
     // 初始化广告渲染组件
     mSplashContainer = this.findViewById(R.id.splash_container);
-
     // 设置软件底部 icon，title
 //    try {
 //      ActivityInfo appInfo = getPackageManager()

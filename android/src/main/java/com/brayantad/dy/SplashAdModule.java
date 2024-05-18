@@ -79,8 +79,8 @@ public class SplashAdModule extends ReactContextBaseJavaModule {
         DyADCore.splashAd_anim_out = android.R.anim.fade_in;
         break;
       default:
-        DyADCore.splashAd_anim_in = -1;
-        DyADCore.splashAd_anim_out = -1;
+        DyADCore.splashAd_anim_in = 0;
+        DyADCore.splashAd_anim_out = 0;
         break;
     }
   }

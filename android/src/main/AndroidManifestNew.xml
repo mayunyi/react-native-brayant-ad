@@ -15,6 +15,7 @@
   <application>
 
     <activity android:name=".dy.activities.SplashActivity" />
+    <activity android:name=".dy.activities.FullScreenActivity" />
     <activity android:name=".dy.activities.RewardActivity" />
 
     <provider

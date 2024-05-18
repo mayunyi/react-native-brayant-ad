@@ -2,28 +2,33 @@ import React, { useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 import {
-  multiply,
   init,
   startRewardVideo,
   requestPermission,
   dyLoadSplashAd,
+  loadDrawFeedAd,
+  startFullScreenVideo,
 } from 'react-native-brayant-ad';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
   useEffect(() => {
-    multiply(3, 7).then(setResult);
     init({
       appid: '5519001',
       app: '猪猪进步',
       codeid_reward_video: '956956876',
     });
-  }, []);
 
+    setTimeout(() => {
+      loadDrawFeedAd({
+        appid: '5519001',
+        codeid: '957795405',
+      });
+    }, 10000);
+  }, []);
+  // 开屏广告
   const onOpenScren = () => {
     const splashAd = dyLoadSplashAd({
-      codeid: '889272631',
+      codeid: '957781965',
       anim: 'default',
     });
 
@@ -49,7 +54,6 @@ export default function App() {
   };
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
       <TouchableOpacity
         style={{
           marginVertical: 20,
@@ -61,7 +65,42 @@ export default function App() {
         onPress={onOpenScren}
       >
         <Text style={{ textAlign: 'center' }}> 开屏</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={{
+          marginVertical: 20,
+          paddingHorizontal: 30,
+          paddingVertical: 15,
+          backgroundColor: '#F96',
+          borderRadius: 50,
+        }}
+        onPress={() => {
+          let fullVideo = startFullScreenVideo({
+            codeid: '957781965',
+          });
+          console.log('FullVideoAd rs:', fullVideo);
+          fullVideo.result?.then((val: any) => {
+            console.log('FullVideoAd rs then val', val);
+          });
 
+          fullVideo.subscribe('onAdLoaded', (event) => {
+            console.log('广告加载成功监听', event);
+          });
+
+          fullVideo.subscribe('onAdError', (event) => {
+            console.log('广告加载失败监听', event);
+          });
+
+          fullVideo.subscribe('onAdClose', (event) => {
+            console.log('广告被关闭监听', event);
+          });
+
+          fullVideo.subscribe('onAdClick', (event) => {
+            console.log('广告点击查看详情监听', event);
+          });
+        }}
+      >
+        <Text style={{ textAlign: 'center' }}> Start 全屏广告</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={{

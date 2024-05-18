@@ -1,17 +1,16 @@
 package com.brayantad.dy.views;
 
+import static com.bytedance.sdk.openadsdk.TTAdLoadType.LOAD;
 import static com.facebook.react.bridge.UiThreadUtil.runOnUiThread;
 
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.util.Log;
-import android.view.Choreographer;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -24,7 +23,6 @@ import com.brayantad.utils.Utils;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
 import com.bytedance.sdk.openadsdk.AdSlot;
-import com.bytedance.sdk.openadsdk.TTAdConstant;
 import com.bytedance.sdk.openadsdk.TTAdNative;
 import com.bytedance.sdk.openadsdk.TTDrawFeedAd;
 import com.bytedance.sdk.openadsdk.TTNativeAd;
@@ -105,9 +103,9 @@ public class DrawFeedView extends RelativeLayout {
     AdSlot adSlot = new AdSlot.Builder()
       .setCodeId(_codeId)
       .setSupportDeepLink(true)
-      .setImageAcceptedSize(1080, 1920)
-      .setExpressViewAcceptedSize(expressViewWidth, expressViewHeight) // 期望模板广告view的size,单位dp
       .setAdCount(1) // 请求广告数量为1到3条
+      .setExpressViewAcceptedSize(expressViewWidth, expressViewHeight) // 期望模板广告view的size,单位dp
+      .setAdLoadType(LOAD)
       .build();
 
     // 请求广告,对请求回调的广告作渲染处理
@@ -227,8 +225,6 @@ public class DrawFeedView extends RelativeLayout {
   // 开始加载自定义方式的 Draw 广告
   private void loadAd() {
     // TODO: 这里动态获取权限待实现
-    // code...
-
     // 创建广告请求参数
     adSlot =
       new AdSlot.Builder()
