@@ -6,7 +6,6 @@ import {
   startRewardVideo,
   requestPermission,
   dyLoadSplashAd,
-  loadDrawFeedAd,
   startFullScreenVideo,
 } from 'react-native-brayant-ad';
 
@@ -15,20 +14,25 @@ export default function App() {
     init({
       appid: '5519001',
       app: '猪猪进步',
-      codeid_reward_video: '956956876',
-    });
-
-    setTimeout(() => {
-      loadDrawFeedAd({
-        appid: '5519001',
-        codeid: '957795405',
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((e) => {
+        console.log(e);
       });
-    }, 10000);
+
+    // setTimeout(() => {
+    //   loadDrawFeedAd({
+    //     appid: '5519001',
+    //     codeid: '957795405',
+    //   });
+    // }, 10000);
   }, []);
   // 开屏广告
   const onOpenScren = () => {
     const splashAd = dyLoadSplashAd({
-      codeid: '957781965',
+      codeid: '889272631',
       anim: 'default',
     });
 

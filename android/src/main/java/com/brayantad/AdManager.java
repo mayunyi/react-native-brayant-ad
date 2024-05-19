@@ -18,6 +18,7 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -44,42 +45,58 @@ public class AdManager extends ReactContextBaseJavaModule {
 
       DyADCore.initSdk(reactAppContext, DyADCore.tt_appid, DyADCore.debug);
 
-      if (options.hasKey("codeid_reward_video")) {
-        DyADCore.codeid_reward_video = options.getString("codeid_reward_video");
-        //提前加载
-        assert DyADCore.codeid_reward_video != null;
+      boolean sdkReady = TTAdSdk.isSdkReady();
+      if(!sdkReady) {
+        TTAdSdk.start(new TTAdSdk.Callback() {
+          @Override
+          public void success() {
+            Log.i(TAG, "success: " + TTAdSdk.isSdkReady());
+            promise.resolve(true);
+          }
 
-        boolean sdkReady = TTAdSdk.isSdkReady();
-        if(!sdkReady) {
-          TTAdSdk.start(new TTAdSdk.Callback() {
-            @Override
-            public void success() {
-              Log.i(TAG, "success: " + TTAdSdk.isSdkReady());
-              RewardActivity.loadAd(
-                DyADCore.codeid_reward_video,
-                () -> {
-                  Log.d(
-                    TAG,
-                    "提前加载 成功 codeid_reward_video " +
-                      DyADCore.codeid_reward_video
-                  );
-                }
-              );
-            }
-
-            @Override
-            public void fail(int code, String msg) {
-              Log.i(TAG, "fail:  code = " + code + " msg = " + msg);
-            }
-            private static TTAdConfig buildConfig(Context context) {
-              return new TTAdConfig.Builder()
-                .appId(DyADCore.tt_appid)//应用ID
-                .supportMultiProcess(true)//开启多进程
-                .build();
-            }
-          });
-        }
+          @Override
+          public void fail(int code, String msg) {
+            Log.i(TAG, "fail:  code = " + code + " msg = " + msg);
+            promise.reject(TAG, "fail:  code = " + code + " msg = " + msg);
+          }
+        });
       }
+      promise.resolve(true);
+//      if (options.hasKey("codeid_reward_video")) {
+//        DyADCore.codeid_reward_video = options.getString("codeid_reward_video");
+//        //提前加载
+//        assert DyADCore.codeid_reward_video != null;
+//
+//        if(!sdkReady) {
+//          TTAdSdk.start(new TTAdSdk.Callback() {
+//            @Override
+//            public void success() {
+//              Log.i(TAG, "success: " + TTAdSdk.isSdkReady());
+//              RewardActivity.loadAd(
+//                DyADCore.codeid_reward_video,
+//                () -> {
+//                  Log.d(
+//                    TAG,
+//                    "提前加载 成功 codeid_reward_video " +
+//                      DyADCore.codeid_reward_video
+//                  );
+//                }
+//              );
+//            }
+//
+//            @Override
+//            public void fail(int code, String msg) {
+//              Log.i(TAG, "fail:  code = " + code + " msg = " + msg);
+//            }
+//            private static TTAdConfig buildConfig(Context context) {
+//              return new TTAdConfig.Builder()
+//                .appId(DyADCore.tt_appid)//应用ID
+//                .supportMultiProcess(true)//开启多进程
+//                .build();
+//            }
+//          });
+//        }
+//      }
     }
   }
 

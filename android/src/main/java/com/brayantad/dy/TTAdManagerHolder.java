@@ -12,7 +12,6 @@ import com.bytedance.sdk.openadsdk.TTAdSdk;
  * 单例来保存TTAdManager实例，在需要初始化sdk的时候调用
  */
 public class TTAdManagerHolder {
-  private static String TAG = "TTAdManagerHolder";
   public static boolean sInit;
   public static Context mContext;
 
