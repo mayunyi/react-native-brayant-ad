@@ -1,10 +1,11 @@
 import { NativeModules, Platform } from 'react-native';
-import { init, loadFeedAd, requestPermission } from './dy/AdManager';
-import startRewardVideo from './dy/RewardVideo';
-import { dyLoadSplashAd } from './dy/SplashAd';
-import { DrawFeedView, loadDrawFeedAd } from './dy/DrawFeedAd';
+import { init, loadFeedAd, requestPermission } from './dy/api/AdManager';
+import startRewardVideo from './dy/api/RewardVideo';
+import { dyLoadSplashAd } from './dy/api/SplashAd';
+import { DrawFeedView, loadDrawFeedAd } from './dy/component/DrawFeedAd';
+import FeedAdView from './dy/component/FeedAd';
 
-import startFullScreenVideo from './dy/FullScreenVideo';
+import startFullScreenVideo from './dy/api/FullScreenVideo';
 const LINKING_ERROR =
   `The package 'react-native-brayant-ad' doesn't seem to be linked. Make sure: \n\n` +
   Platform.select({ ios: "- You have run 'pod install'\n", default: '' }) +
@@ -34,4 +35,5 @@ export {
   startFullScreenVideo,
   dyLoadSplashAd,
   DrawFeedView,
+  FeedAdView
 };

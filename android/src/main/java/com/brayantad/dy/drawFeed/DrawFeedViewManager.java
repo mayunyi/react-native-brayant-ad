@@ -1,23 +1,13 @@
-package com.brayantad.dy;
-
-import android.util.Log;
+package com.brayantad.dy.drawFeed;
 
 import androidx.annotation.NonNull;
 
-import com.brayantad.dy.views.DrawFeedView;
-import com.bytedance.sdk.openadsdk.AdSlot;
-import com.bytedance.sdk.openadsdk.TTAdNative;
-import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
-import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.bridge.ReactContext;
-import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.ReadableMap;
+import com.brayantad.dy.drawFeed.view.DrawFeedView;
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.ViewGroupManager;
 import com.facebook.react.uimanager.annotations.ReactProp;
 
-import java.util.List;
 import java.util.Map;
 
 public class DrawFeedViewManager extends ViewGroupManager<DrawFeedView> {

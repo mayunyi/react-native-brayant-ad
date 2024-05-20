@@ -22,7 +22,6 @@ const LINKING_ERROR =
 
 const ComponentName = 'DrawFeedAdViewManager';
 
-// FIXME: 记得全部重新申请代码位，因为穿山甲马上要弃用旧代码位
 type DrawFeedAdProps = {
   codeid: string;
   appid: string;
@@ -48,14 +47,6 @@ export const DrawFeedView = (props: DrawFeedAdProps) => {
     visible = true,
     style,
   } = props;
-  // useEffect(() => {
-  //   //提前加载 drawfeed ad
-  //   loadDrawFeedAd({
-  //     appid,
-  //     codeid,
-  //   });
-  // }, [appid, codeid]);
-
   if (!visible) return null;
 
   const styleObj = style ? style : styles.container;

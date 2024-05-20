@@ -1,5 +1,6 @@
-package com.brayantad.dy.views;
+package com.brayantad.dy.feedAd.view;
 
+import static com.bytedance.sdk.openadsdk.TTAdLoadType.PRELOAD;
 import static com.facebook.react.bridge.UiThreadUtil.runOnUiThread;
 
 import android.app.Activity;
@@ -29,6 +30,7 @@ import com.facebook.react.uimanager.events.RCTEventEmitter;
 import java.util.List;
 
 public class FeedAdView extends RelativeLayout {
+  // 信息流广告
   private static final String TAG = "FeedAd";
 
   private Activity mContext;
@@ -36,7 +38,7 @@ public class FeedAdView extends RelativeLayout {
   private String _codeid = "";
   private AdSlot adSlot;
 
-  private int _expectedWidth = 0;
+  private int _expectedWidth = 375;
   private int _expectedHeight = 0; // 高度0 自适应
   private final long startTime = 0;
   private boolean mHasShowDownloadActive = false;
@@ -95,7 +97,7 @@ public class FeedAdView extends RelativeLayout {
         .setSupportDeepLink(true)
         .setAdCount(1) // 请求广告数量为1到3条
         .setExpressViewAcceptedSize(_expectedWidth, _expectedHeight) // 期望模板广告view的size,单位dp,高度0自适应
-        .setImageAcceptedSize(640, 320)
+        .setAdLoadType(PRELOAD)
         .build();
 
     // 请求广告，对请求回调的广告作渲染处理

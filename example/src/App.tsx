@@ -1,28 +1,30 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import DrawFeedView from './DrawFeedViewDemo';
 import {
   init,
   startRewardVideo,
   requestPermission,
   dyLoadSplashAd,
   startFullScreenVideo,
+  FeedAdView,
 } from 'react-native-brayant-ad';
 
 export default function App() {
-  // useEffect(() => {
-  //   init({
-  //     appid: '5519001',
-  //     app: '猪猪进步',
-  //   })
-  //     .then((res) => {
-  //       console.log(res);
-  //       requestPermission();
-  //     })
-  //     .catch((e) => {
-  //       console.log(e);
-  //     });
-  // }, []);
+  const [showFeedView, setShowFeedView] = useState(false);
+  useEffect(() => {
+    init({
+      appid: '5519001',
+      app: '猪猪进步',
+    })
+      .then((res) => {
+        console.log(res);
+        setShowFeedView(true);
+        requestPermission();
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
   // 开屏广告
   const onOpenScren = () => {
     const splashAd = dyLoadSplashAd({
@@ -52,7 +54,23 @@ export default function App() {
   };
   return (
     <View style={styles.container}>
-      <DrawFeedView />
+      <FeedAdView
+        codeid={'957782005'}
+        adWidth={400}
+        visible={showFeedView}
+        onAdLayout={(data: any) => {
+          console.log('Feed 广告加载成功！', data);
+        }}
+        onAdClose={(data: any) => {
+          console.log('Feed 广告关闭！', data);
+        }}
+        onAdError={(err: any) => {
+          console.log('Feed 广告加载失败！', err);
+        }}
+        onAdClick={(val: any) => {
+          console.log('Feed 广告被用户点击！', val);
+        }}
+      />
       <TouchableOpacity
         style={{
           marginVertical: 20,

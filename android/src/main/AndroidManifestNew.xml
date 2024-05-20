@@ -14,9 +14,9 @@
   <uses-permission android:name="android.permission.WAKE_LOCK" data-tomark-pass="true"/>
   <application>
 
-    <activity android:name=".dy.activities.SplashActivity" />
-    <activity android:name=".dy.activities.FullScreenActivity" />
-    <activity android:name=".dy.activities.RewardActivity" />
+    <activity android:name=".dy.splash.activity.SplashActivity" />
+    <activity android:name=".dy.fullScreen.activity.FullScreenActivity" />
+    <activity android:name=".dy.rewardVideo.activity.RewardActivity" />
 
     <provider
       android:name="com.bytedance.sdk.openadsdk.TTFileProvider"

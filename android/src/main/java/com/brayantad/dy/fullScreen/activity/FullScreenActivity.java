@@ -1,6 +1,6 @@
-package com.brayantad.dy.activities;
+package com.brayantad.dy.fullScreen.activity;
 
-import static com.brayantad.dy.FullScreenVideoModule.sendEvent;
+import static com.brayantad.dy.fullScreen.FullScreenVideoModule.sendEvent;
 
 import com.brayantad.R;
 import android.app.Activity;

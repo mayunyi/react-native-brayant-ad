@@ -1,4 +1,4 @@
-package com.brayantad.dy.activities;
+package com.brayantad.dy.splash.activity;
 
 import static com.bytedance.sdk.openadsdk.TTAdLoadType.PRELOAD;
 

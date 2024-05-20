@@ -1,9 +1,10 @@
-package com.brayantad.dy;
+package com.brayantad.dy.drawFeed;
 
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.brayantad.dy.DyADCore;
 import com.bytedance.sdk.openadsdk.AdSlot;
 import com.bytedance.sdk.openadsdk.TTAdNative;
 import com.bytedance.sdk.openadsdk.TTNativeExpressAd;

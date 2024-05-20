@@ -1,12 +1,12 @@
-package com.brayantad.dy;
+package com.brayantad.dy.splash;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.brayantad.dy.activities.SplashActivity;
+import com.brayantad.dy.DyADCore;
+import com.brayantad.dy.splash.activity.SplashActivity;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;

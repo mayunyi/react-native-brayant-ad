@@ -1,6 +1,6 @@
-package com.brayantad.dy.activities;
+package com.brayantad.dy.rewardVideo.activity;
 
-import static com.brayantad.dy.RewardVideoModule.sendEvent;
+import static com.brayantad.dy.rewardVideo.RewardVideoModule.sendEvent;
 
 import androidx.annotation.Nullable;
 

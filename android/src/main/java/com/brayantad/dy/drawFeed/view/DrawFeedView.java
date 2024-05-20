@@ -1,4 +1,4 @@
-package com.brayantad.dy.views;
+package com.brayantad.dy.drawFeed.view;
 
 import static com.bytedance.sdk.openadsdk.TTAdLoadType.LOAD;
 import static com.facebook.react.bridge.UiThreadUtil.runOnUiThread;
