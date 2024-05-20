@@ -50,8 +50,8 @@ public class FullScreenVideoModule extends ReactContextBaseJavaModule {
       intent.putExtra("orientation", orientation);
       Activity context = mContext.getCurrentActivity();
       // 不要过渡动画
-        assert context != null;
-        context.overridePendingTransition(0, 0);
+      assert context != null;
+      context.overridePendingTransition(0, 0);
       context.startActivityForResult(intent, 10000);
     } catch (Exception e) {
       e.printStackTrace();

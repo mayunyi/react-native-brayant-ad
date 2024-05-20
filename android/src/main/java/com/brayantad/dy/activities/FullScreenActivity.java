@@ -69,11 +69,8 @@ public class FullScreenActivity extends Activity {
     // 创建广告请求参数 AdSlot ,具体参数含义参考文档
     AdSlot adSlot = new AdSlot.Builder()
       .setCodeId(codeId)
+      .setExpressViewAcceptedSize(500,500)
       .setSupportDeepLink(true)
-      .setImageAcceptedSize(1080, 1920)
-      .setRewardName(DyADCore.rewardName) // 奖励的名称
-      .setRewardAmount(DyADCore.rewardAmount) // 奖励的数量
-      .setUserID(DyADCore.userId) // 用户id,必传参数
       .setOrientation(
               Objects.equals(orientation, "HORIZONTAL")
           ? TTAdConstant.HORIZONTAL

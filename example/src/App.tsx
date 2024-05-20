@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-
+import DrawFeedView from './DrawFeedViewDemo';
 import {
   init,
   startRewardVideo,
@@ -10,25 +10,19 @@ import {
 } from 'react-native-brayant-ad';
 
 export default function App() {
-  useEffect(() => {
-    init({
-      appid: '5519001',
-      app: '猪猪进步',
-    })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-
-    // setTimeout(() => {
-    //   loadDrawFeedAd({
-    //     appid: '5519001',
-    //     codeid: '957795405',
-    //   });
-    // }, 10000);
-  }, []);
+  // useEffect(() => {
+  //   init({
+  //     appid: '5519001',
+  //     app: '猪猪进步',
+  //   })
+  //     .then((res) => {
+  //       console.log(res);
+  //       requestPermission();
+  //     })
+  //     .catch((e) => {
+  //       console.log(e);
+  //     });
+  // }, []);
   // 开屏广告
   const onOpenScren = () => {
     const splashAd = dyLoadSplashAd({
@@ -58,6 +52,7 @@ export default function App() {
   };
   return (
     <View style={styles.container}>
+      <DrawFeedView />
       <TouchableOpacity
         style={{
           marginVertical: 20,
@@ -87,24 +82,24 @@ export default function App() {
             console.log('FullVideoAd rs then val', val);
           });
 
-          fullVideo.subscribe('onAdLoaded', (event) => {
+          fullVideo.subscribe('onAdLoaded' as any, (event) => {
             console.log('广告加载成功监听', event);
           });
 
-          fullVideo.subscribe('onAdError', (event) => {
+          fullVideo.subscribe('onAdError' as any, (event) => {
             console.log('广告加载失败监听', event);
           });
 
-          fullVideo.subscribe('onAdClose', (event) => {
+          fullVideo.subscribe('onAdClose' as any, (event) => {
             console.log('广告被关闭监听', event);
           });
 
-          fullVideo.subscribe('onAdClick', (event) => {
+          fullVideo.subscribe('onAdClick' as any, (event) => {
             console.log('广告点击查看详情监听', event);
           });
         }}
       >
-        <Text style={{ textAlign: 'center' }}> Start 全屏广告</Text>
+        <Text style={{ textAlign: 'center' }}> Start 全屏视频广告</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={{
@@ -115,7 +110,6 @@ export default function App() {
           borderRadius: 50,
         }}
         onPress={() => {
-          requestPermission();
           const rewardVideo = startRewardVideo({
             codeid: '956956876',
           });
@@ -124,19 +118,19 @@ export default function App() {
             console.log('RewardVideo 回调结果', val);
           });
 
-          rewardVideo.subscribe('onAdLoaded', (event) => {
+          rewardVideo.subscribe('onAdLoaded' as any, (event) => {
             console.log('广告加载成功监听', event);
           });
 
-          rewardVideo.subscribe('onAdError', (event) => {
+          rewardVideo.subscribe('onAdError' as any, (event) => {
             console.log('广告加载失败监听', event);
           });
 
-          rewardVideo.subscribe('onAdClose', (event) => {
+          rewardVideo.subscribe('onAdClose' as any, (event) => {
             console.log('广告被关闭监听', event);
           });
 
-          rewardVideo.subscribe('onAdClick', (event) => {
+          rewardVideo.subscribe('onAdClick' as any, (event) => {
             console.log('广告点击查看详情监听', event);
           });
         }}

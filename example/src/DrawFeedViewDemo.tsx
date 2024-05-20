@@ -14,34 +14,31 @@ export default function App() {
     init({
       appid: '5519001',
       app: '猪猪进步',
-      codeid_reward_video: '956956876',
+    }).then((res) => {
+      if (res) {
+        loadDrawFeedAd({
+          appid: '5519001',
+          codeid: '957795405',
+        });
+      }
     });
-
-    setTimeout(() => {
-      loadDrawFeedAd({
-        appid: '5519001',
-        codeid: '957795405',
-      });
-    }, 10000);
   }, []);
   return (
     <View style={styles.container}>
-      {showDrawFeedView && (
-        <DrawFeedView
-          codeid={'957795405'}
-          appid={'5519001'}
-          visible={true}
-          onAdError={(e: any) => {
-            console.log('DrawFeedAd 加载失败', e);
-          }}
-          onAdShow={(e: any) => {
-            console.log('DrawFeedAd 开屏开始展示', e);
-          }}
-          onAdClick={(e: any) => {
-            console.log('onAdClick DrawFeed', e.nativeEvent);
-          }}
-        />
-      )}
+      <DrawFeedView
+        codeid={'957795405'}
+        appid={'5519001'}
+        visible={true}
+        onAdError={(e: any) => {
+          console.log('DrawFeedAd 加载失败', e);
+        }}
+        onAdShow={(e: any) => {
+          console.log('DrawFeedAd 开屏开始展示', e);
+        }}
+        onAdClick={(e: any) => {
+          console.log('onAdClick DrawFeed', e.nativeEvent);
+        }}
+      />
       <TouchableOpacity onPress={() => setShowDrawFeedView(!showDrawFeedView)}>
         <Text>显示/隐藏DrawFeed</Text>
       </TouchableOpacity>
