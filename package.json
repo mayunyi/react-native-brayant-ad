@@ -1,6 +1,6 @@
 {
   "name": "react-native-brayant-ad",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "国内广告联盟sdk封装",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",

@@ -35,5 +35,5 @@ export {
   startFullScreenVideo,
   dyLoadSplashAd,
   DrawFeedView,
-  FeedAdView
+  FeedAdView,
 };
