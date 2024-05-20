@@ -1,0 +1,34 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:ignore="HardcodedText">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="15dp"
+        android:background="#E3E2E2"/>
+
+    <Button
+        android:id="@+id/btn_check_tool"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:gravity="left|center_vertical"
+        android:drawablePadding="20dp"
+        android:stateListAnimator="@null"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:background="#fff"
+        android:textAllCaps="false"
+        android:text="穿山甲SDK自测工具"
+        android:textColor="#000"
+        android:textSize="14sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E3E2E2"/>
+
+
+</LinearLayout>

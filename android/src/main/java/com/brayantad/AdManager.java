@@ -41,10 +41,12 @@ public class AdManager extends ReactContextBaseJavaModule {
     //默认头条穿山甲
     DyADCore.tt_appid = options.hasKey("appid") ? options.getString("appid") : DyADCore.tt_appid;
     DyADCore.debug = options.hasKey("debug") ? options.getBoolean("debug") : DyADCore.debug;
+    DyADCore.rewardName = options.hasKey("reward") ? options.getBoolean("reward") : DyADCore.rewardName;
+    DyADCore.rewardAmount = options.hasKey("amount") ? options.getBoolean("amount") : DyADCore.rewardAmount;
+    DyADCore.appName = options.hasKey("app") ? options.getBoolean("app") : DyADCore.appName;
+
     if (DyADCore.tt_appid != null) {
-
       DyADCore.initSdk(reactAppContext, DyADCore.tt_appid, DyADCore.debug);
-
       boolean sdkReady = TTAdSdk.isSdkReady();
       if(!sdkReady) {
         TTAdSdk.start(new TTAdSdk.Callback() {

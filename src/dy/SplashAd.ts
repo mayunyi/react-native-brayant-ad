@@ -13,7 +13,6 @@ export interface AD_EVENT_TYPE {
   onAdSkip: string; // 用户点击跳过广告监听
   onAdShow: string; // 开屏广告开始展示
 }
-
 export interface SPLASHAD_PROPS_TYPE {
   codeid: string;
   anim?: 'default' | 'none' | 'catalyst' | 'slide' | 'fade';

@@ -16,11 +16,6 @@ let listenerCache: ListenerCache = {} as ListenerCache;
 
 type rewardInfo = {
   codeid: string;
-  app?: string; //头条穿山甲参数appName (目前安卓可用，可选)
-  uid?: string; //头条穿山甲参数userId (目前安卓可用，可选);
-  reward?: string; //头条穿山甲参数rewardName (目前安卓可用，可选)
-  amount?: number; //头条穿山甲参数rewardAmount (目前安卓可用，可选)
-  provider?: '头条' | '百度' | '腾讯' | '快手';
 };
 
 export default function (info: rewardInfo) {
