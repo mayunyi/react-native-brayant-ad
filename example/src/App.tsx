@@ -13,8 +13,8 @@ export default function App() {
   const [showFeedView, setShowFeedView] = useState(false);
   useEffect(() => {
     init({
-      appid: '5519001',
-      app: '猪猪进步',
+      appid: '5555235',
+      app: '设备信息',
     })
       .then((res) => {
         console.log(res);
@@ -28,7 +28,7 @@ export default function App() {
   // 开屏广告
   const onOpenScren = () => {
     const splashAd = dyLoadSplashAd({
-      codeid: '889272631',
+      codeid: '889356851',
       anim: 'default',
     });
 
@@ -54,23 +54,23 @@ export default function App() {
   };
   return (
     <View style={styles.container}>
-      <FeedAdView
-        codeid={'957782005'}
-        adWidth={400}
-        visible={showFeedView}
-        onAdLayout={(data: any) => {
-          console.log('Feed 广告加载成功！', data);
-        }}
-        onAdClose={(data: any) => {
-          console.log('Feed 广告关闭！', data);
-        }}
-        onAdError={(err: any) => {
-          console.log('Feed 广告加载失败！', err);
-        }}
-        onAdClick={(val: any) => {
-          console.log('Feed 广告被用户点击！', val);
-        }}
-      />
+      {/*<FeedAdView*/}
+      {/*  codeid={'957782005'}*/}
+      {/*  adWidth={400}*/}
+      {/*  visible={showFeedView}*/}
+      {/*  onAdLayout={(data: any) => {*/}
+      {/*    console.log('Feed 广告加载成功！', data);*/}
+      {/*  }}*/}
+      {/*  onAdClose={(data: any) => {*/}
+      {/*    console.log('Feed 广告关闭！', data);*/}
+      {/*  }}*/}
+      {/*  onAdError={(err: any) => {*/}
+      {/*    console.log('Feed 广告加载失败！', err);*/}
+      {/*  }}*/}
+      {/*  onAdClick={(val: any) => {*/}
+      {/*    console.log('Feed 广告被用户点击！', val);*/}
+      {/*  }}*/}
+      {/*/>*/}
       <TouchableOpacity
         style={{
           marginVertical: 20,
