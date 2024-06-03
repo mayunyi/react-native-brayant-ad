@@ -11,6 +11,20 @@
 npm install react-native-brayant-ad
 ```
 
+在RN项目的 Project级别的 build.gradle 中添加如下配置 （android/build.gradle）
+```
+allprojects {
+  repositories {
+    google()
+    mavenCentral()
+    // 添加穿山甲SDK仓库
+    maven {
+      url 'https://artifact.bytedance.com/repository/pangle'
+    }
+  }
+}
+```
+
 ## 必要配置
 在项目入口文件中初始化init, 如果不是全局初始化的就需要在每次调用的时候传入
 ```js

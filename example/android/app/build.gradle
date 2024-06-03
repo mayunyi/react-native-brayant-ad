@@ -113,6 +113,8 @@ dependencies {
     } else {
         implementation jscFlavor
     }
+
+//  implementation 'com.pangle.cn:ads-sdk-pro:6.1.0.7'
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
