@@ -79,8 +79,8 @@ repositories {
 
 
 dependencies {
-//    compileOnly fileTree(dir: 'libs', include: ['*.aar'])
-   implementation fileTree(dir: 'libs', include: ['*.aar', '*.jar'], exclude: [])
+   compileOnly fileTree(dir: 'libs', include: ['*.aar'])
+//    implementation fileTree(dir: 'libs', include: ['*.aar', '*.jar'], exclude: [])
   // For < 0.71, this will be from the local maven repo
   // For > 0.71, this will be replaced by `com.facebook.react:react-android:$version` by react gradle plugin
   //noinspection GradleDynamicVersion

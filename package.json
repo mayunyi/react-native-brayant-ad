@@ -41,14 +41,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+http://gitlab.ztdzx.cn:9005/react-native/react-native-brayant-ad.git"
+    "url": "git+git@github.com:mayunyi/react-native-brayant-ad.git"
   },
   "author": "mahai <mahai@brayant.com> (https://www.brayant.com)",
   "license": "MIT",
   "bugs": {
-    "url": "http://gitlab.ztdzx.cn:9005/react-native/react-native-brayant-ad/issues"
+    "url": "https://github.com/mayunyi/react-native-brayant-ad/issues"
   },
-  "homepage": "http://gitlab.ztdzx.cn:9005/react-native/react-native-brayant-ad#readme",
+  "homepage": "https://github.com/mayunyi/react-native-brayant-ad#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
