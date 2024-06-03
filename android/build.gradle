@@ -3,12 +3,6 @@ buildscript {
     google()
     mavenCentral()
   }
-  repositories {
-    flatDir {
-      dir "$rootDir/libs"
-    }
-    // 其他仓库...
-  }
   dependencies {
     classpath "com.android.tools.build:gradle:7.2.1"
 //    classpath "com.android.tools.build:gradle:4.0.1"
@@ -82,13 +76,7 @@ repositories {
   mavenCentral()
   google()
 }
-allprojects {
-  repositories {
-    flatDir {
-      dir "$rootDir/libs"
-    }
-  }
-}
+
 
 dependencies {
 //    compileOnly fileTree(dir: 'libs', include: ['*.aar'])
