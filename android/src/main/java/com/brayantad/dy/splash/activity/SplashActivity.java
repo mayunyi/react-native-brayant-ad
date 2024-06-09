@@ -25,8 +25,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.bytedance.sdk.openadsdk.AdSlot;
+import com.bytedance.sdk.openadsdk.CSJAdError;
 import com.bytedance.sdk.openadsdk.TTAdNative;
 import com.bytedance.sdk.openadsdk.TTAdSdk;
+import com.bytedance.sdk.openadsdk.CSJSplashAd;
 import com.bytedance.sdk.openadsdk.TTSplashAd;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.WritableMap;
@@ -174,46 +176,50 @@ public class SplashActivity extends AppCompatActivity implements WeakHandler.IHa
       .build();
 
     // 请求广告，调用开屏广告异步请求接口，对请求回调的广告作渲染处理
+
     mTTAdNative.loadSplashAd(
       adSlot,
-      new TTAdNative.SplashAdListener() {
+      new TTAdNative.CSJSplashAdListener() {
 
         @Override
-        @MainThread
-        public void onError(int code, String message) {
+        public void onSplashLoadSuccess(CSJSplashAd csjSplashAd) {
+          //5700及以上新增，开屏素材加载成功
+
+        }
+
+        @Override
+        public void onSplashLoadFail(CSJAdError csjAdError) {
           // 广告渲染失败
-          Log.d(TAG, "开屏广告渲染失败:" + message);
+          Log.d(TAG, "开屏广告加载失败:" + csjAdError);
+          // 回调监听方法
+          WritableMap params = Arguments.createMap();
+          params.putString("onSplashLoadFail", "广告渲染加载:" + csjAdError);
+          sendEvent(TAG + "-onSplashLoadFail", params);
+
+          // 关闭开屏广告
+          goback.run();
+        }
+
+        @Override
+        public void onSplashRenderSuccess(CSJSplashAd csjSplashAd) {
+          // 开屏广告加载成功，调用显示开屏广告
+          DyADCore.splashAd = csjSplashAd;
+          callback.run();
+        }
+
+        @Override
+        public void onSplashRenderFail(CSJSplashAd csjSplashAd, CSJAdError csjAdError) {
+          // 广告渲染失败
+          Log.d(TAG, "开屏广告渲染失败:" + csjAdError);
           // showToast(message + " - " + code_id);
 
           // 回调监听方法
           WritableMap params = Arguments.createMap();
-          params.putString("onAdError", "广告渲染失败:" + message);
+          params.putString("onAdError", "广告渲染失败:" + csjAdError);
           sendEvent(TAG + "-onAdError", params);
 
           // 关闭开屏广告
           goback.run();
-        }
-
-        @Override
-        @MainThread
-        public void onTimeout() {
-          // 开屏广告渲染超时
-          // showToast("加载超时");
-          // 回调监听方法
-          WritableMap params = Arguments.createMap();
-          params.putString("onAdError", "加载超时");
-          sendEvent(TAG + "-onAdError", params);
-
-          // 关闭开屏广告
-          goback.run();
-        }
-
-        @Override
-        @MainThread
-        public void onSplashAdLoad(TTSplashAd ad) {
-          // 开屏广告加载成功，调用显示开屏广告
-          DyADCore.splashAd = ad;
-          callback.run();
         }
       },
       AD_TIME_OUT
@@ -221,7 +227,7 @@ public class SplashActivity extends AppCompatActivity implements WeakHandler.IHa
   }
 
   private void showSplashAd() {
-    TTSplashAd ad = DyADCore.splashAd;
+    CSJSplashAd ad = DyADCore.splashAd;
     mHasLoaded = true;
     mHandler.removeCallbacksAndMessages(null);
     if (ad == null) {
@@ -249,11 +255,21 @@ public class SplashActivity extends AppCompatActivity implements WeakHandler.IHa
     // ad.setNotAllowSdkCountdown();
 
     // 设置SplashView的交互监听器
-    ad.setSplashInteractionListener(
-      new TTSplashAd.AdInteractionListener() {
+
+    ad.setSplashAdListener(
+
+      new CSJSplashAd.SplashAdListener() {
 
         @Override
-        public void onAdClicked(View view, int type) {
+        public void onSplashAdShow(CSJSplashAd csjSplashAd) {
+          Log.d(TAG, "onAdShow");
+          WritableMap params = Arguments.createMap();
+          params.putBoolean("onAdShow", true);
+          sendEvent(TAG + "-onAdShow", params);
+        }
+
+        @Override
+        public void onSplashAdClick(CSJSplashAd csjSplashAd) {
           Log.d(TAG, "onAdClick");
           WritableMap params = Arguments.createMap();
           params.putBoolean("onAdClick", true);
@@ -264,32 +280,13 @@ public class SplashActivity extends AppCompatActivity implements WeakHandler.IHa
         }
 
         @Override
-        public void onAdShow(View view, int type) {
-          Log.d(TAG, "onAdShow");
-          WritableMap params = Arguments.createMap();
-          params.putBoolean("onAdShow", true);
-          sendEvent(TAG + "-onAdShow", params);
-          // showToast("开屏广告展示");
-        }
-
-        @Override
-        public void onAdSkip() {
+        public void onSplashAdClose(CSJSplashAd csjSplashAd,  int closeType) {
           Log.d(TAG, "onAdSkip");
-          WritableMap params = Arguments.createMap();
-          params.putBoolean("onAdSkip", true);
-          sendEvent(TAG + "-onAdSkip", params);
-
-          // showToast("开屏广告跳过");
-          goToMainActivity();
-        }
-
-        @Override
-        public void onAdTimeOver() {
-          Log.d(TAG, "onAdTimeOver");
-          // showToast("开屏广告倒计时结束");
           WritableMap params = Arguments.createMap();
           params.putBoolean("onAdClose", true);
           sendEvent(TAG + "-onAdClose", params);
+
+          // showToast("开屏广告跳过");
           goToMainActivity();
         }
       }
@@ -310,7 +307,7 @@ public class SplashActivity extends AppCompatActivity implements WeakHandler.IHa
   }
 
   private void showToast(String msg) {
-     TToast.show(this, "splash:" + msg);
+    TToast.show(this, "splash:" + msg);
   }
 
   @Override
